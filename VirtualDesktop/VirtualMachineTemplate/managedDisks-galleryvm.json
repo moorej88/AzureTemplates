@@ -52,7 +52,7 @@
         "description": "The storage account containing the custom VHD."
       }
     },
-    "diskSizeGB": {
+    "rdshVMdiskSizeGB": {
       "type": "int",
       "metadata": {
         "description": "The number of availability zone to be used when create the VMs."
@@ -460,7 +460,7 @@
           },
           "osDisk": {
             "name": "[concat(parameters('rdshPrefix'), add(copyindex(), parameters('vmInitialNumber')), '-disk-os')]",
-	          "diskSizeGB": "[parameters('diskSizeGB')]",
+	    "diskSizeGB": "[parameters('rdshVMdiskSizeGB')]",
             "createOption": "FromImage",
             "managedDisk": {
               "storageAccountType": "[variables('storageAccountType')]"
