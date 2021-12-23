@@ -52,6 +52,18 @@
         "description": "The storage account containing the custom VHD."
       }
     },
+    "diskSizeGB": {
+      "type": "int",
+      "metadata": {
+        "description": "The number of availability zone to be used when create the VMs."
+      },
+      "defaultValue": 64,
+      "allowedValues": [
+        32,
+        64,
+        128
+      ]
+    },
     "vmGalleryImageOffer": {
       "type": "string",
       "metadata": {
@@ -447,6 +459,8 @@
             "version": "[if(empty(parameters('vmGalleryImageVersion')), 'latest', parameters('vmGalleryImageVersion'))]"
           },
           "osDisk": {
+            "name": "[concat(parameters('rdshPrefix'), add(copyindex(), parameters('vmInitialNumber')), '-disk-os')]",
+	          "diskSizeGB": "[parameters('diskSizeGB')]",
             "createOption": "FromImage",
             "managedDisk": {
               "storageAccountType": "[variables('storageAccountType')]"
